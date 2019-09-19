@@ -29,7 +29,7 @@ const MyForm = ({ values, errors, touched, status }) => {
 					Terms Of Service
 					<Field type="checkbox" name="terms" checked={values.terms} />
 				</label>
-				<button>Submit</button>
+				<button type="submit">Submit</button>
 			</Form>
 			{users.map(user => (
 				<ul key={user.id}>
@@ -48,13 +48,14 @@ const FormikMyForm = withFormik({
 			name: name || "",
 			email: email || "",
 			password: password || "",
-			terms: terms || false
+			terms: terms || ""
 		};
 	},
 	validationSchema: Yup.object().shape({
 		name: Yup.string().required("Must Enter A Name"),
 		email: Yup.string().required("Must Enter An Email"),
-		password: Yup.string().required("Must Enter A Password")
+		password: Yup.string().required("Must Enter A Password"),
+		terms: Yup.bool().required("Must Check")
 	}),
 	handleSubmit(values, { setStatus }) {
 		axios
